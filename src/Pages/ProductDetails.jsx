@@ -15,7 +15,7 @@ export default function ProductDetails() {
     //     setProductDetails(findItem);
     // }, []);
 
-    console.log(state)
+    // console.log(state)
     return (
         <div className="container py-5">
             <Link to="/product" className="btn btn-secondary">

@@ -1,18 +1,24 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { IoArrowBackSharp } from 'react-icons/io5'
 
 export default function CocktailDetail() {
-    const params = useParams();
+    const { state } = useLocation()
+    console.log(state)
+    // const params = useParams();
 
     const [cocktailDetail, setCocktailDetail] = useState({});
 
     useEffect(() => {
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`)
-            .then((resp) => resp.json())
-            .then((data) => setCocktailDetail(data.drinks[0]))
-    })
+        setCocktailDetail(state)
+    }, [state])
+
+    // useEffect(() => {
+    //     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`)
+    //         .then((resp) => resp.json())
+    //         .then((data) => setCocktailDetail(data.drinks[0]))
+    // })
     // console.log(params)
     return (<>
         <div className="container py-4" >

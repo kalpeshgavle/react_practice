@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ProductList } from '../utilis/ProductList'
 import { Link, useNavigate } from 'react-router-dom'
+import { WrapperContext } from '../App';
 
 
 function Product() {
     const [list, setList] = useState(ProductList);
     const [filterList, setFilterList] = useState(ProductList)
-    const [searchText, setSearchText] = useState("")
+    // const [searchText, setSearchText] = useState("")
 
+    const { searchValue, setSearchValue } = useContext(WrapperContext)
     const navigate = useNavigate();
 
     useEffect(() => {
         const searchProduct = filterList.filter((item) => {
             return (
-                item.name.toLowerCase().includes(searchText)
+                item.name.toLowerCase().includes(searchValue)
             )
         });
         setList(searchProduct);
-    }, [searchText])
+    }, [searchValue])
 
     // console.log("list:", list)
 
     return <>
         <div className="container">
             <h1>Products</h1>
-            <input
+            {/* <input
+                value={searchValue}
                 type="text"
                 className="form-control mb-4"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-            />
+                onChange={(e) => setSearchValue(e.target.value)}
+            /> */}
+            {/* {list === null && <h1>Items not found.....</h1>} */}
             {
-                list.map((item) => {
+                list && list.map((item) => {
                     const { id, name, desp } = item
                     return (
                         <div className="card mb-3" key={id}>

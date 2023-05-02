@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { WrapperContext } from '../App';
 function Navbar() {
+
+    const { searchValue, setSearchValue, setIsLogin } = useContext(WrapperContext);
+
+    function logout() {
+        setIsLogin(false)
+    }
     return <>
         <div className="container">
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,9 +34,9 @@ function Navbar() {
 
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                            <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className="form-control me-2" type="text" placeholder="Search" />
                         </form>
+                        <button className='btn btn-danger' onClick={logout}>Logout</button>
                     </div>
                 </div>
             </nav>
